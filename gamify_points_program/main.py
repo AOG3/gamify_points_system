@@ -69,6 +69,7 @@ def online_shopping():
 
 
 window = tk.Tk()
+window.title("Gamify Points")
 
 # Frame to hold the label that displays the results
 frm_display_results = tk.Frame(borderwidth=1)
