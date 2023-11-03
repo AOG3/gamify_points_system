@@ -10,62 +10,31 @@ except:
 str_total = str(init_total)
 lbl_width = 30
 
+class Button_command():
 
-def start_task():
-    if True:
-        value = int(lbl_total["text"])
-        lbl_total["text"] = f"{value + 3}"
-        total = lbl_total["text"]
-        # send new lbl_total to collection function to be logged
-        cl.format_logging_points("Start_task", 3, total)
+    def __init__(self, amount: int, button_name: str) -> None:
+        self.amount = amount
+        self.button_name = button_name
 
-def complete_task():
-    if True:
-        value = int(lbl_total["text"])
-        lbl_total["text"] = f"{value + 1}"
-        total = lbl_total["text"]
-        # send new lbl_total to collection function to be logged
-        cl.format_logging_points("Complete_task", 1, total)
+    def command(self):
+        if True:
+            # Operation to update the total
+            value = int(lbl_total["text"]) # Gets the total and saves it to value
+            lbl_total["text"] = f"{value + int(self.amount)}" # Updates and saves the total to the total label
+            total = lbl_total["text"] # Assigns the updated total to a var to be logged.
+            # send new lbl_total to collection function to be logged
+            cl.format_logging_points(str(self.button_name), 3, total)
 
-def moc():
-    if True:
-        value = int(lbl_total["text"])
-        lbl_total["text"] = f"{value + 2}"
-        total = lbl_total["text"]
-        # send new lbl_total to collection function to be logged
-        cl.format_logging_points("moc", 2, total)
 
-def social_media():
-    if True:
-        value = int(lbl_total["text"])
-        lbl_total["text"] = f"{value - 2}"
-        total = lbl_total["text"]
-        # send new lbl_total to collection function to be logged
-        cl.format_logging_points("Social_media", -2, total)
-
-def youtube():
-    if True:
-        value = int(lbl_total["text"])
-        lbl_total["text"] = f"{value - 2}"
-        total = lbl_total["text"]
-        # send new lbl_total to collection function to be logged
-        cl.format_logging_points("YouTube", -2, total)
-
-def gaming():
-    if True:
-        value = int(lbl_total["text"])
-        lbl_total["text"] = f"{value - 1}"
-        total = lbl_total["text"]
-        # send new lbl_total to collection function to be logged
-        cl.format_logging_points("Gaming", -1, total)
-
-def online_shopping():
-    if True:
-        value = int(lbl_total["text"])
-        lbl_total["text"] = f"{value - 10}"
-        total = lbl_total["text"]
-        # send new lbl_total to collection function to be logged
-        cl.format_logging_points("Online_shopping", -10, total)
+# Instantiating button commands
+start_task = Button_command(3, "Start_task")
+complete_task = Button_command(1, "Complete_task")
+# Change moc name to Definitions (Explain a concept).
+moc = Button_command(2, "moc")
+social_media = Button_command(-2, "Social_media")
+youtube = Button_command(-2, "YouTube")
+gaming = Button_command(-1, "Gaming")
+online_shopping = Button_command(-10,"Online_shopping")
 
 
 window = tk.Tk()
@@ -99,7 +68,7 @@ frm_button_space.pack()
 
 # Frame for the earn buttons
 frm_earn_buttons = tk.Frame(master=frm_button_space, borderwidth=1)
-frm_earn_buttons.pack(side=tk.LEFT)#grid(row=0,column=0,sticky="w")
+frm_earn_buttons.pack(side=tk.LEFT)
 
 # Buttons that will be part of Earn will have the parameters tk.Button(master=frm_earn_buttons, ...)
 
@@ -107,23 +76,23 @@ frm_earn_buttons.pack(side=tk.LEFT)#grid(row=0,column=0,sticky="w")
 btn_start_task = tk.Button(master=frm_earn_buttons, 
                            text="Start Task", 
                            relief=tk.RAISED, 
-                           command=start_task)
-btn_start_task.pack(fill=tk.X)#grid(row=0,column=0, sticky="w")
+                           command=start_task.command)
+btn_start_task.pack(fill=tk.X)
 
 
 # Complete task button. Earn
 btn_complete_task = tk.Button(master=frm_earn_buttons, 
                               text="Complete Task", 
                               relief=tk.RAISED, 
-                              command=complete_task)
-btn_complete_task.pack(fill=tk.X)#grid(row=1,column=0, sticky="w")
+                              command=complete_task.command)
+btn_complete_task.pack(fill=tk.X)
 
 # M.O.C. button. Earn
 btn_moc = tk.Button(master=frm_earn_buttons, 
                     text="M.O.C.", 
                     relief=tk.RAISED,
-                    command=moc)
-btn_moc.pack(fill=tk.X)#grid(row=2,column=0, sticky="w")
+                    command=moc.command)
+btn_moc.pack(fill=tk.X)
 
 
 # MIDDLE SEPARATOR FRAME
@@ -137,7 +106,7 @@ lbl_separate_buttons.pack()
 
 # Frame for the spend buttons
 frm_spend_buttons = tk.Frame(master=frm_button_space, borderwidth=1)
-frm_spend_buttons.pack(side=tk.RIGHT)#grid(row=0,column=1,sticky="e")
+frm_spend_buttons.pack(side=tk.RIGHT)
 
 # Buttons that will be part of Spend will have the parameters tk.Button(master=frm_spend_buttons, ...)
 
@@ -145,28 +114,28 @@ frm_spend_buttons.pack(side=tk.RIGHT)#grid(row=0,column=1,sticky="e")
 btn_social_media = tk.Button(master=frm_spend_buttons, 
                              text="Social Media", 
                              relief=tk.RAISED,
-                             command=social_media)
-btn_social_media.pack(fill=tk.X) #grid(row=0,column=0, sticky="e")
+                             command=social_media.command)
+btn_social_media.pack(fill=tk.X)
 
 # YouTube button. Spend
 btn_youtube = tk.Button(master=frm_spend_buttons, 
                         text="YouTube", 
                         relief=tk.RAISED,
-                        command=youtube)
-btn_youtube.pack(fill=tk.X) #grid(row=1,column=0, sticky="e")
+                        command=youtube.command)
+btn_youtube.pack(fill=tk.X)
 
 # Gaming button. Spend
 btn_gaming = tk.Button(master=frm_spend_buttons, 
                        text="Gaming", 
                        relief=tk.RAISED,
-                       command=gaming)
+                       command=gaming.command)
 btn_gaming.pack(fill=tk.X)
 
 # Online shopping button. Spend
 btn_online_shop = tk.Button(master=frm_spend_buttons, 
                             text="Online Shopping", 
                             relief=tk.RAISED,
-                            command=online_shopping)
+                            command=online_shopping.command)
 btn_online_shop.pack(fill=tk.X)
 
 window.mainloop()
